@@ -46,16 +46,16 @@ public class SimpleBankingApp {
 		// in the ideal case, we will read from file or database, but let's hard-code for now
 		Account anAccount;
 		try {
-			anAccount = new Account("5495-1234", "mike", "Standard", new SimpleDateFormat("dd/MM/yyyy").parse("20/08/2019"));
+			anAccount = new Account("mike", "Standard","5495-1234", new SimpleDateFormat("dd/MM/yyyy").parse("20/08/2019"));
 			accounts.add(anAccount);
 			
-			anAccount = new Account("5495-1239", "mike", "Standard", new SimpleDateFormat("dd/MM/yyyy").parse("20/08/2020"));
+			anAccount = new Account("mike", "Standard", "5495-1239", new SimpleDateFormat("dd/MM/yyyy").parse("20/08/2020"));
 			accounts.add(anAccount);
 
-			anAccount = new Account("5495-1291", "mike", "Saving", new SimpleDateFormat("dd/MM/yyyy").parse("21/07/2019"));
+			anAccount = new Account("mike", "Saving","5495-1291", new SimpleDateFormat("dd/MM/yyyy").parse("21/07/2019"));
 			accounts.add(anAccount);
 
-			anAccount = new Account("5495-6789", "David.McDonald@gmail.com", "Saving", new SimpleDateFormat("dd/MM/yyyy").parse("20/08/2019"));
+			anAccount = new Account("David.McDonald@gmail.com", "Saving","5495-6789", new SimpleDateFormat("dd/MM/yyyy").parse("20/08/2019"));
 			accounts.add(anAccount);
 
 		} catch (ParseException e) {			
@@ -64,6 +64,8 @@ public class SimpleBankingApp {
 	}
 	
 	public static void printAllAccounts() {
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM, dd, yyyy");
+        
 		System.out.println("There are: " + accounts.size() + " accounts in the system.");
 		//System.out.println("Account_number | username_of_account_holder | account_type | account_opening_date");
 
@@ -72,7 +74,7 @@ public class SimpleBankingApp {
 		System.out.println("--------------------------------------------------------------------------------");
 		
 		for  (int i = 0; i < accounts.size(); i++) 
-            System.out.println(accounts.get(i).toString() + "| $" + getBalance(accounts.get(i).getAccountNumber()));
+            System.out.println(String.format("%-10s| %-30s| %-10s| %-15s| %-15s", accounts.get(i).getAccountNumber(), accounts.get(i).getUsernameOfAccountHolder(), accounts.get(i).getAccountType(), "(" + sdf.format(accounts.get(i).getAccountOpeningDate()) + ")", "$" + getBalance(accounts.get(i).getAccountNumber())));
 		
 		System.out.println();
 	}
@@ -91,9 +93,16 @@ public class SimpleBankingApp {
 	 * @return A double value, being the balance of the account
 	 */
 	public static double getBalance(String account_number) {
-		return 0;
-		// TODO
-		
+		double balance = 0;
+		for(int i = 0; i < transactions.size(); i++) {
+			Transaction transaction = transactions.get(i);
+			
+			if(transaction.getAccountNumber() == account_number) {
+				balance += transaction.getTransactionAmount();
+			}
+		}
+			
+		return balance;
 	}
 	
 	
