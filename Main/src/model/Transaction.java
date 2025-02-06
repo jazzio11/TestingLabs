@@ -13,8 +13,32 @@ public class Transaction {
 		TransactionDate = transactionDate;
 	}
 
+	public Date getTransactionDate() {
+		return TransactionDate;
+	}
+
+	public double getTransactionAmount() {
+		return TransactionAmount;
+	}
+
+	public String getAccountNumber() {
+		return AccountNumber;
+	}
+
+	public void setAccountNumber(String accountNumber) {
+		AccountNumber = accountNumber;
+	}
+
+	public void setTransactionAmount(double transactionAmount) {
+		TransactionAmount = transactionAmount;
+	}
+
+	public void setTransactionDate(Date transactionDate) {
+		TransactionDate = transactionDate;
+	}
+
 	@Override
-	public String toString() {//commit
+	public String toString() {
 		return "Transaction{" +
 				"AccountNumber='" + AccountNumber + '\'' +
 				", TransactionAmount=" + TransactionAmount +
