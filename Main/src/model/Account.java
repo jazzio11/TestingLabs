@@ -5,7 +5,7 @@ import java.util.Date;
 public class Account {
 	String accountNumber;
 	String usernameOfAccountHolder;
-	String accountType;
+	String accountType;	//"Standard" or "Savings"
 	Date accountOpeningDate;
 
 	public Account(String usernameOfAccountHolder, String accountType, String accountNumber, Date accountOpeningDate) {
