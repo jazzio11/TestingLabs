@@ -46,4 +46,14 @@ public class Account {
 	public void setAccountOpeningDate(Date accountOpeningDate) {
 		this.accountOpeningDate = accountOpeningDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Account{" +
+				"accountNumber='" + accountNumber + '\'' +
+				", usernameOfAccountHolder='" + usernameOfAccountHolder + '\'' +
+				", accountType='" + accountType + '\'' +
+				", accountOpeningDate=" + accountOpeningDate +
+				'}';
+	}
 }

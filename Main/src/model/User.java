@@ -54,4 +54,15 @@ public class User {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", mobileNumber='" + mobileNumber + '\'' +
+				'}';
+	}
 }

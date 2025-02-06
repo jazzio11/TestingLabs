@@ -12,4 +12,13 @@ public class Transaction {
 		AccountNumber = accountNumber;
 		TransactionDate = transactionDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Transaction{" +
+				"AccountNumber='" + AccountNumber + '\'' +
+				", TransactionAmount=" + TransactionAmount +
+				", TransactionDate=" + TransactionDate +
+				'}';
+	}
 }
