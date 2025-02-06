@@ -77,8 +77,8 @@ public class SimpleBankingApp {
 		System.out.println();
 	}
 	
-	public static void addTransaction(String account_number, double amount) { 
-		Transaction aTransaction =  new Transaction(account_number, amount, Calendar.getInstance().getTime());
+	public static void addTransaction(String accountNumber, double amount) {
+		Transaction aTransaction =  new Transaction(accountNumber, amount, Calendar.getInstance().getTime());
 		transactions.add(aTransaction);
 	}
 	
@@ -87,10 +87,10 @@ public class SimpleBankingApp {
 	 * that match the account and get their sum total. For example, if an account has only two transactions in the 
 	 * system, with values = $10.79 and $-140, the balance would be $-129.21
 	 * 
-	 * @param account_number
+	 * @param accountNumber
 	 * @return A double value, being the balance of the account
 	 */
-	public static double getBalance(String account_number) {
+	public static double getBalance(String accountNumber) {
 		return 0;
 		// TODO
 		
