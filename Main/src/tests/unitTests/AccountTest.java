@@ -40,6 +40,7 @@ public class AccountTest {
 			TestUtils.printTestPass(testCaseName);
 		} else {
 			TestUtils.printTestFail(testCaseName);
+
 		}
 
 		//Ensures the account type is 'Savings' or 'Standard'
