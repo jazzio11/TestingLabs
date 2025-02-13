@@ -18,11 +18,39 @@ public class UserTest {
 
 		User TestUser = new User(TestUserName, TestPassword, TestFirstName, TestLastName, TestPhone);
 
+		String testCaseName = "TC1-getUsername";
 		if (TestUser.getUsername().equals(TestUserName)) {
-			System.out.println(TestUtils.TEXT_COLOR_GREEN + "Test Passed" + TestUtils.TEXT_COLOR_RESET);
+			TestUtils.printTestPass(testCaseName);
 		} else {
-			System.out.println(TestUtils.TEXT_COLOR_RED + "Test Failed" + TestUtils.TEXT_COLOR_RESET);
+			TestUtils.printTestFail(testCaseName);
 		}
 
+		testCaseName = "TC2-getFirstName";
+		if (TestUser.getFirstName().equals(TestFirstName)) {
+			TestUtils.printTestPass(testCaseName);
+		} else {
+			TestUtils.printTestFail(testCaseName);
+		}
+
+		testCaseName = "TC3-getLastName";
+		if (TestUser.getLastName().equals(TestLastName)) {
+			TestUtils.printTestPass(testCaseName);
+		} else {
+			TestUtils.printTestFail(testCaseName);
+		}
+
+		testCaseName = "TC4-getPassword";
+		if (TestUser.getPassword().equals(TestPassword)) {
+			TestUtils.printTestPass(testCaseName);
+		} else {
+			TestUtils.printTestFail(testCaseName);
+		}
+
+		testCaseName = "TC5-getMobileNumber";
+		if (TestUser.getMobileNumber().equals(TestPhone)) {
+			TestUtils.printTestPass(testCaseName);
+		} else {
+			TestUtils.printTestFail(testCaseName);
+		}
 	}
 }
