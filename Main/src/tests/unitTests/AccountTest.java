@@ -40,7 +40,6 @@ public class AccountTest {
 			TestUtils.printTestPass(testCaseName);
 		} else {
 			TestUtils.printTestFail(testCaseName);
-
 		}
 
 		//Ensures the account type is 'Savings' or 'Standard'
@@ -57,5 +56,12 @@ public class AccountTest {
 		} else {
 			TestUtils.printTestFail(testCaseName);
 		}
+		//assertion block
+		assert accountNumber.equals(testAccountUser.getAccountNumber());
+		assert usernameOfAccountHolder.equals(testAccountUser.getUsernameOfAccountHolder());
+		assert accountType.equals(testAccountUser.getAccountType());
+		assert accountOpeningDate == testAccountUser.getAccountOpeningDate();
+		assert false;// assert check
+
 	}
 }

@@ -48,6 +48,10 @@ public class TranscationTest {
 		} else {
 			TestUtils.printTestFail(testCaseName);
 		}
-
+		//assertion block
+		assert accountNumber.equals(transaction.getAccountNumber());
+		assert transactionAmount == transaction.getTransactionAmount();
+		assert transactionDate.equals(transaction.getTransactionDate());
+		assert false; //assert check
 	}
 }

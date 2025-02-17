@@ -52,5 +52,12 @@ public class UserTest {
 		} else {
 			TestUtils.printTestFail(testCaseName);
 		}
+		//assertion block
+		assert TestUserName.equals(TestUser.getUsername());
+		assert TestPassword.equals(TestUser.getPassword());
+		assert TestPhone.equals(TestUser.getMobileNumber());
+		assert TestFirstName.equals(TestUser.getFirstName());
+		assert TestLastName.equals(TestUser.getLastName());
+		assert false; //assert check
 	}
 }
