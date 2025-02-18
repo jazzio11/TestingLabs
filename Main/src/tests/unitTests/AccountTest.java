@@ -16,10 +16,11 @@ public class AccountTest {
 	public static void testAccountConstructor() {
 		String accountNumber = "0001";
 		String usernameOfAccountHolder = "mike";
+		String accountNickname = "Mike's Account";
 		String accountType = "Standard";	//"Standard" or "Savings"
 		Date accountOpeningDate = new Date();//gets the current date
 
-		Account testAccountUser = new Account(usernameOfAccountHolder, accountType, accountNumber, accountOpeningDate);
+		Account testAccountUser = new Account(usernameOfAccountHolder, accountNickname, accountType, accountNumber, accountOpeningDate);
 
 		String testCaseName = "TC1-accountNumber";
 		if (testAccountUser.getAccountNumber().equals(accountNumber)) {
@@ -53,6 +54,22 @@ public class AccountTest {
 
 		testCaseName = "TC5-getPassword";
 		if (testAccountUser.getAccountOpeningDate().equals(accountOpeningDate)) {
+			TestUtils.printTestPass(testCaseName);
+		} else {
+			TestUtils.printTestFail(testCaseName);
+		}
+
+		testCaseName = "TC6-getNickname";
+		if (testAccountUser.getAccountNickName().equals(accountNickname)) {
+			TestUtils.printTestPass(testCaseName);
+		} else {
+			TestUtils.printTestFail(testCaseName);
+		}
+
+		testCaseName = "TC7-setNickname";
+		String newNickname = "New Account Nickname";
+		testAccountUser.setAccountNickName(newNickname);
+		if (testAccountUser.getAccountNickName().equals(newNickname)) {
 			TestUtils.printTestPass(testCaseName);
 		} else {
 			TestUtils.printTestFail(testCaseName);

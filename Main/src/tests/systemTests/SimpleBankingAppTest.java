@@ -126,12 +126,38 @@ public class SimpleBankingAppTest {
 		// 4-tear-down
 	}
 
+	// this test method (test case) verifies if the getBalance feature works properly
+	public static void testGetBalanceUnhappyPath() {
+		// 1-Setup phase
+		AccountController accountController = new AccountController();
+		String invalidAccountNumber = "0000-0000";
+		Boolean error = false;
+
+		// 2-Exercise phase
+		try {
+			double balance = accountController.getBalance(invalidAccountNumber);
+		} catch (IllegalArgumentException e) {
+			error = true;
+		}
+
+		// 3-verify
+		assert error == true;
+		if (error == true)
+			System.out.println(TestUtils.TEXT_COLOR_GREEN + "testGetBalanceUnhappyPath: TC1 passed"+ TestUtils.TEXT_COLOR_RESET);
+		else {
+			System.out.println(TestUtils.TEXT_COLOR_RED + "testGetBalanceUnhappyPath: TC1 FAILED XXX: no error thrown by invalid account number");
+		}
+
+		// 4-tear-down
+	}
+
 	public static void main(String[] args) {
 		// we need to call our test cases (methods)
 		testLoadData();
 		testDeposits();
 		testWithdrawals(); // uncomment this call, when you have developed the test method (test case)
 		testDepositsUnhappyPath();
+		testGetBalanceUnhappyPath();
 	}
 
 }
