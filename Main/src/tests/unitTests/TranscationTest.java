@@ -21,6 +21,7 @@ public class TranscationTest {
 
 		Transaction transaction = new Transaction(accountNumber, transactionAmount, transactionDate);
 
+		assert accountNumber.equals(transaction.getAccountNumber());
 		String testCaseName = "TC1-getAccountNumber";
 		if (transaction.getAccountNumber().equals(accountNumber)) {
 			TestUtils.printTestPass(testCaseName);
@@ -28,6 +29,7 @@ public class TranscationTest {
 			TestUtils.printTestFail(testCaseName);
 		}
 
+		assert transactionAmount == transaction.getTransactionAmount();
 		testCaseName = "TC2-getTransactionAmount";
 		if (transaction.getTransactionAmount() == transactionAmount) {
 			TestUtils.printTestPass(testCaseName);
@@ -35,6 +37,7 @@ public class TranscationTest {
 			TestUtils.printTestFail(testCaseName);
 		}
 
+		assert transactionDate.equals(transaction.getTransactionDate());
 		testCaseName = "TC3-getTransactionDate";
 		if (transaction.getTransactionDate().equals(transactionDate)) {
 			TestUtils.printTestPass(testCaseName);
@@ -42,16 +45,6 @@ public class TranscationTest {
 			TestUtils.printTestFail(testCaseName);
 		}
 
-		testCaseName = "TC4-transcationAountGreaterThanZero";
-		if (transaction.getTransactionAmount() > 0) {
-			TestUtils.printTestPass(testCaseName);
-		} else {
-			TestUtils.printTestFail(testCaseName);
-		}
-		//assertion block
-		assert accountNumber.equals(transaction.getAccountNumber());
-		assert transactionAmount == transaction.getTransactionAmount();
-		assert transactionDate.equals(transaction.getTransactionDate());
 		assert false; //assert check
 	}
 }

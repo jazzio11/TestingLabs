@@ -18,6 +18,7 @@ public class UserTest {
 
 		User TestUser = new User(TestUserName, TestPassword, TestFirstName, TestLastName, TestPhone);
 
+		assert TestUserName.equals(TestUser.getUsername());
 		String testCaseName = "TC1-getUsername";
 		if (TestUser.getUsername().equals(TestUserName)) {
 			TestUtils.printTestPass(testCaseName);
@@ -25,6 +26,7 @@ public class UserTest {
 			TestUtils.printTestFail(testCaseName);
 		}
 
+		assert TestFirstName.equals(TestUser.getFirstName());
 		testCaseName = "TC2-getFirstName";
 		if (TestUser.getFirstName().equals(TestFirstName)) {
 			TestUtils.printTestPass(testCaseName);
@@ -32,6 +34,7 @@ public class UserTest {
 			TestUtils.printTestFail(testCaseName);
 		}
 
+		assert TestLastName.equals(TestUser.getLastName());
 		testCaseName = "TC3-getLastName";
 		if (TestUser.getLastName().equals(TestLastName)) {
 			TestUtils.printTestPass(testCaseName);
@@ -39,6 +42,7 @@ public class UserTest {
 			TestUtils.printTestFail(testCaseName);
 		}
 
+		assert TestPassword.equals(TestUser.getPassword());
 		testCaseName = "TC4-getPassword";
 		if (TestUser.getPassword().equals(TestPassword)) {
 			TestUtils.printTestPass(testCaseName);
@@ -46,18 +50,14 @@ public class UserTest {
 			TestUtils.printTestFail(testCaseName);
 		}
 
+		assert TestPhone.equals(TestUser.getMobileNumber());
 		testCaseName = "TC5-getMobileNumber";
 		if (TestUser.getMobileNumber().equals(TestPhone)) {
 			TestUtils.printTestPass(testCaseName);
 		} else {
 			TestUtils.printTestFail(testCaseName);
 		}
-		//assertion block
-		assert TestUserName.equals(TestUser.getUsername());
-		assert TestPassword.equals(TestUser.getPassword());
-		assert TestPhone.equals(TestUser.getMobileNumber());
-		assert TestFirstName.equals(TestUser.getFirstName());
-		assert TestLastName.equals(TestUser.getLastName());
+
 		assert false; //assert check
 	}
 }

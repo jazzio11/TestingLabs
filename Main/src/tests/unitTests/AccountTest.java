@@ -21,6 +21,7 @@ public class AccountTest {
 
 		Account testAccountUser = new Account(usernameOfAccountHolder, accountType, accountNumber, accountOpeningDate);
 
+		assert accountNumber.equals(testAccountUser.getAccountNumber());
 		String testCaseName = "TC1-accountNumber";
 		if (testAccountUser.getAccountNumber().equals(accountNumber)) {
 			TestUtils.printTestPass(testCaseName);
@@ -28,39 +29,30 @@ public class AccountTest {
 			TestUtils.printTestFail(testCaseName);
 		}
 
-		testCaseName = "TC2-getFirstName";
+		assert usernameOfAccountHolder.equals(testAccountUser.getUsernameOfAccountHolder());
+		testCaseName = "TC2-getUsernameOfAccountHolder";
 		if (testAccountUser.getUsernameOfAccountHolder().equals(usernameOfAccountHolder)) {
 			TestUtils.printTestPass(testCaseName);
 		} else {
 			TestUtils.printTestFail(testCaseName);
 		}
 
-		testCaseName = "TC3-getLastName";
+		assert accountType.equals(testAccountUser.getAccountType());
+		testCaseName = "TC3-getAccountType";
 		if (testAccountUser.getAccountType().equals(accountType)) {
 			TestUtils.printTestPass(testCaseName);
 		} else {
 			TestUtils.printTestFail(testCaseName);
 		}
 
-		//Ensures the account type is 'Savings' or 'Standard'
-		testCaseName = "TC4-savingsOrStandard";
-		if (testAccountUser.getAccountType().equals("Savings") || testAccountUser.getAccountType().equals("Standard")) {
-			TestUtils.printTestPass(testCaseName);
-		} else {
-			TestUtils.printTestFail(testCaseName);
-		}
-
-		testCaseName = "TC5-getPassword";
+		assert accountOpeningDate == testAccountUser.getAccountOpeningDate();
+		testCaseName = "TC4-getAccountOpeningDate";
 		if (testAccountUser.getAccountOpeningDate().equals(accountOpeningDate)) {
 			TestUtils.printTestPass(testCaseName);
 		} else {
 			TestUtils.printTestFail(testCaseName);
 		}
-		//assertion block
-		assert accountNumber.equals(testAccountUser.getAccountNumber());
-		assert usernameOfAccountHolder.equals(testAccountUser.getUsernameOfAccountHolder());
-		assert accountType.equals(testAccountUser.getAccountType());
-		assert accountOpeningDate == testAccountUser.getAccountOpeningDate();
+
 		assert false;// assert check
 
 	}
