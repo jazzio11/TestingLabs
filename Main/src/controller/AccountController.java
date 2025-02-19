@@ -26,6 +26,13 @@ public class AccountController {
      * @return The calculated balance
      */
     public double getBalance(String accountNumber) {
+        boolean accountExists = getAccounts().stream()
+                .anyMatch(account -> account.getAccountNumber().equals(accountNumber));
+
+        if (!accountExists) {
+            throw new IllegalArgumentException("Account number not found: " + accountNumber);
+        }
+
         return transactions.stream()
                 .filter(transaction -> transaction.getAccountNumber().equals(accountNumber))
                 .mapToDouble(Transaction::getTransactionAmount)
@@ -37,9 +44,16 @@ public class AccountController {
      *
      * @param accountNumber The account number
      * @param amount        The transaction amount
+     * @return              True  - success
+     *                      False - failure
      */
-    public void addTransaction(String accountNumber, double amount) {
-        transactions.add(new Transaction(accountNumber, amount, Calendar.getInstance().getTime()));
+    public boolean addTransaction(String accountNumber, double amount) {
+        boolean success = false;
+        if(amount != 0) {
+            transactions.add(new Transaction(accountNumber, amount, Calendar.getInstance().getTime()));
+            success = true;
+        }
+        return success;
     }
 
     /**
@@ -48,17 +62,28 @@ public class AccountController {
     public void printAllAccounts() {
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
         System.out.println("There are: " + accounts.size() + " accounts in the system.");
-        System.out.println(String.format("%-10s| %-30s| %-10s| %-15s| %-15s",
-                "Account #", "Username", "Type", "Opening Date", "Balance"));
+        System.out.println(String.format("%-10s| %-20s| %-20s| %-10s| %-10s| %-10s",
+                "Account #", "Account NickName", "Username", "Type", "Opening Date", "Balance"));
         System.out.println("--------------------------------------------------------------------------------");
 
-        accounts.forEach(account -> System.out.println(String.format("%-10s| %-30s| %-10s| %-15s| %-15s",
-                account.getAccountNumber(),
-                account.getUsernameOfAccountHolder(),
-                account.getAccountType(),
-                "(" + sdf.format(account.getAccountOpeningDate()) + ")",
-                "$" + getBalance(account.getAccountNumber())
-        )));
+        accounts.forEach(account -> {
+            String balanceStr;
+            try {
+                double balance = getBalance(account.getAccountNumber());
+                balanceStr = "" + balance;
+            } catch (IllegalArgumentException e) {
+                balanceStr = "Account Number Does Not Exist"; // Display error message instead of balance
+            }
+
+            System.out.println(String.format("%-10s| %-20s| %-20s| %-10s| %-10s| %-10s",
+                    account.getAccountNumber(),
+                    account.getAccountNickName(),
+                    account.getUsernameOfAccountHolder(),
+                    account.getAccountType(),
+                    "(" + sdf.format(account.getAccountOpeningDate()) + ")",
+                    "$" + balanceStr
+            ));
+        });
         System.out.println();
     }
 
@@ -66,10 +91,10 @@ public class AccountController {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
-            accounts.add(new Account("mike", "Standard", "5495-1234", sdf.parse("20/08/2019")));
-            accounts.add(new Account("mike", "Standard", "5495-1239", sdf.parse("20/08/2020")));
-            accounts.add(new Account("mike", "Saving", "5495-1291", sdf.parse("21/07/2019")));
-            accounts.add(new Account("David.McDonald@gmail.com", "Saving", "5495-6789", sdf.parse("20/08/2019")));
+            accounts.add(new Account("mike", "Mike's Account", "Standard", "5495-1234", sdf.parse("20/08/2019")));
+            accounts.add(new Account("mike", "Mike's Account 2", "Standard", "5495-1239", sdf.parse("20/08/2020")));
+            accounts.add(new Account("mike", "Mike's Savings", "Saving", "5495-1291", sdf.parse("21/07/2019")));
+            accounts.add(new Account("David.McDonald@gmail.com", "David's Savings", "Saving", "5495-6789", sdf.parse("20/08/2019")));
         } catch (ParseException e) {
             System.err.println("Error parsing date: " + e.getMessage());
         }
@@ -81,10 +106,5 @@ public class AccountController {
 
     public Vector<Transaction> getTransactions() {
         return new Vector<>(transactions);
-    }
-
-    public static void main(String[] args) {
-        AccountController controller = new AccountController();
-        controller.printAllAccounts();
     }
 }

@@ -72,6 +72,36 @@ public class SimpleBankingAppTest {
 		// read more about the tear-down phase of test cases: http://xunitpatterns.com/Four%20Phase%20Test.html
 	}
 
+	// this test method (test case) verifies if the Deposit feature works properly
+	public static void testDepositsUnhappyPath() {
+		// 1-Setup phase
+		AccountController accountController = new AccountController();
+		double balanceBefore = accountController.getBalance("5495-1234");
+		double depositAmount = 0;
+
+		// 2-Exercise phase
+		boolean transactionSuccess = accountController.addTransaction("5495-1234", depositAmount);
+		double balanceAfter = accountController.getBalance("5495-1234");
+
+		// 3-verify
+		assert balanceBefore + depositAmount == balanceAfter;
+		if (balanceBefore + depositAmount == balanceAfter && !transactionSuccess)
+			System.out.println(TestUtils.TEXT_COLOR_GREEN + "testDepositsUnhappyPath: TC1 passed"+ TestUtils.TEXT_COLOR_RESET);
+		else {
+			if(!transactionSuccess){
+				System.out.println(TestUtils.TEXT_COLOR_RED + "testDepositsUnhappyPath: TC1 FAILED XXX: balanceBefore + depositAmount != balanceAfter");
+			}else{
+				System.out.println(TestUtils.TEXT_COLOR_RED + "testDepositsUnhappyPath: TC1 FAILED XXX: add transaction function returned success");
+			}
+			System.out.format("testDeposits: balanceBefore = %.2f ; depositAmount = %.2f ; balanceAfter = %.2f %s\n",
+					balanceBefore , depositAmount , balanceAfter, TestUtils.TEXT_COLOR_RESET);
+
+		}
+
+		// 4-tear-down: put the system state back in where it was
+		// read more about the tear-down phase of test cases: http://xunitpatterns.com/Four%20Phase%20Test.html
+	}
+
 	// this test method (test case) verifies if the Withdraw feature works properly
 	public static void testWithdrawals() {
 		// 1-Setup phase
@@ -96,11 +126,38 @@ public class SimpleBankingAppTest {
 		// 4-tear-down
 	}
 
+	// this test method (test case) verifies if the getBalance feature works properly
+	public static void testGetBalanceUnhappyPath() {
+		// 1-Setup phase
+		AccountController accountController = new AccountController();
+		String invalidAccountNumber = "0000-0000";
+		Boolean error = false;
+
+		// 2-Exercise phase
+		try {
+			double balance = accountController.getBalance(invalidAccountNumber);
+		} catch (IllegalArgumentException e) {
+			error = true;
+		}
+
+		// 3-verify
+		assert error == true;
+		if (error == true)
+			System.out.println(TestUtils.TEXT_COLOR_GREEN + "testGetBalanceUnhappyPath: TC1 passed"+ TestUtils.TEXT_COLOR_RESET);
+		else {
+			System.out.println(TestUtils.TEXT_COLOR_RED + "testGetBalanceUnhappyPath: TC1 FAILED XXX: no error thrown by invalid account number");
+		}
+
+		// 4-tear-down
+	}
+
 	public static void main(String[] args) {
 		// we need to call our test cases (methods)
 		testLoadData();
 		testDeposits();
 		testWithdrawals(); // uncomment this call, when you have developed the test method (test case)
+		testDepositsUnhappyPath();
+		testGetBalanceUnhappyPath();
 	}
 
 }
