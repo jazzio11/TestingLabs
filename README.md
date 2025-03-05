@@ -1,2 +1,2 @@
-# Lab1
-Jazz and Charlie's Lab1 Unit testing project
+# TestingLabs
+Jazz and Charlie's TestLabs for CSC3056
